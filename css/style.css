@@ -448,8 +448,7 @@ button { font-family: inherit; cursor: none; border: none; background: none; }
 .about-bg-photo {
   position: absolute;
   inset: 0;
-  /*background: url('/images/karla_photo.jpg') center center / cover no-repeat;
-  Placeholder colour shown until real photo is added */
+  background: url('/images/karla_photo.jpg') center 20% / cover no-repeat;
   background-color: #5a6650;
 }
 
