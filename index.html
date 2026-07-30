@@ -94,7 +94,7 @@
     <div class="hero-content">
       <p class="hero-eyebrow">Paarl, South Africa</p>
       <h1 class="hero-name">
-        <img src="/images/KDB_Main_Logo.png" alt="KDB Interiors" />
+        <img src="images/KDB_Main_Logo.png" alt="KDB Interiors" />
       </h1>
       <p class="hero-title">Interior Architect &amp; Designer</p>
       <div class="hero-divider" aria-hidden="true"></div>
@@ -156,32 +156,92 @@
         <button class="portfolio-tab" data-category="residential" role="tab" aria-selected="false">Residential</button>
       </div>
 
-      <div class="portfolio-showcase reveal reveal-delay-3">
+      <!-- Project Grids (one per category, cards link into a project's gallery) -->
+      <div class="portfolio-projects reveal reveal-delay-3">
+
+        <div class="project-grid active" data-category-grid="hospitality">
+          <button class="project-card" data-project="restaurant" type="button">
+            <div class="project-card-media">
+              <img src="images/RESTAURANT_1.jpg" alt="Restaurant project by Karla de Beer" loading="lazy" />
+            </div>
+            <div class="project-card-info">
+              <h3>Restaurant Fit-Out</h3>
+              <p>Hospitality Design</p>
+              <span class="project-card-count">4 Photos</span>
+            </div>
+          </button>
+        </div>
+
+        <div class="project-grid" data-category-grid="commercial" hidden>
+          <button class="project-card" data-project="office" type="button">
+            <div class="project-card-media">
+              <img src="images/OFFICE_1.jpg" alt="Office project by Karla de Beer" loading="lazy" />
+            </div>
+            <div class="project-card-info">
+              <h3>Office Fit-Out</h3>
+              <p>Commercial Design</p>
+              <span class="project-card-count">9 Photos</span>
+            </div>
+          </button>
+
+          <button class="project-card" data-project="versivia" type="button">
+            <div class="project-card-media">
+              <img src="images/VERSIVIA_1.jpg" alt="Versivia Roses project by Karla de Beer" loading="lazy" />
+            </div>
+            <div class="project-card-info">
+              <h3>Versivia Roses</h3>
+              <p>Commercial Design</p>
+              <span class="project-card-count">3 Photos</span>
+            </div>
+          </button>
+        </div>
+
+        <div class="project-grid" data-category-grid="residential" hidden>
+          <button class="project-card" data-project="farmhouse" type="button">
+            <div class="project-card-media">
+              <img src="images/FARMHOUSE_1.jpg" alt="Farmhouse project by Karla de Beer" loading="lazy" />
+            </div>
+            <div class="project-card-info">
+              <h3>Farmhouse Residence</h3>
+              <p>Residential Design</p>
+              <span class="project-card-count">8 Photos</span>
+            </div>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Project Gallery (shown once a project card is selected) -->
+      <div class="portfolio-showcase" id="portfolioShowcase" hidden>
+        <button class="showcase-back" id="showcaseBack" type="button">
+          <span aria-hidden="true">‹</span> Back to Projects
+        </button>
+
         <div class="showcase-carousel">
           <div class="showcase-images">
             <!-- Hospitality images -->
-            <figure class="showcase-image active" data-category="hospitality">
+            <figure class="showcase-image active" data-category="hospitality" data-project="restaurant">
               <img src="images/RESTAURANT_1.jpg" alt="Restaurant interior design project by Karla de Beer" loading="lazy" />
               <figcaption class="image-caption">
                 <h3>Hospitality</h3>
                 <p>Hospitality Design</p>
               </figcaption>
             </figure>
-            <figure class="showcase-image" data-category="hospitality">
+            <figure class="showcase-image" data-category="hospitality" data-project="restaurant">
               <img src="images/RESTAURANT_2.jpg" alt="Restaurant interior design project by Karla de Beer" loading="lazy" />
               <figcaption class="image-caption">
                 <h3>Dining Experience</h3>
                 <p>Hospitality Design</p>
               </figcaption>
             </figure>
-            <figure class="showcase-image" data-category="hospitality">
+            <figure class="showcase-image" data-category="hospitality" data-project="restaurant">
               <img src="images/RESTAURANT_3.jpg" alt="Restaurant interior design project by Karla de Beer" loading="lazy" />
               <figcaption class="image-caption">
                 <h3>Culinary Space</h3>
                 <p>Hospitality Design</p>
               </figcaption>
             </figure>
-            <figure class="showcase-image" data-category="hospitality">
+            <figure class="showcase-image" data-category="hospitality" data-project="restaurant">
               <img src="images/RESTAURANT_4.jpg" alt="Restaurant interior design project by Karla de Beer" loading="lazy" />
               <figcaption class="image-caption">
                 <h3>Refined Ambiance</h3>
@@ -189,8 +249,8 @@
               </figcaption>
             </figure>
 
-            <!-- Commercial images (placeholders - replace with actual images) -->
-            <figure class="showcase-image" data-category="commercial">
+            <!-- Commercial images: Office project -->
+            <figure class="showcase-image" data-category="commercial" data-project="office">
               <img src="images/OFFICE_1.jpg" alt="Commercial interior design project by Karla de Beer" loading="lazy" />
               <figcaption class="image-caption">
                 <h3>Office Space</h3>
@@ -198,7 +258,7 @@
               </figcaption>
             </figure>
 
-            <figure class="showcase-image" data-category="commercial">
+            <figure class="showcase-image" data-category="commercial" data-project="office">
               <img src="images/OFFICE_2.jpg" alt="Commercial interior design project by Karla de Beer" loading="lazy" />
               <figcaption class="image-caption">
                 <h3>Office Space</h3>
@@ -206,7 +266,7 @@
               </figcaption>
             </figure>
 
-            <figure class="showcase-image" data-category="commercial">
+            <figure class="showcase-image" data-category="commercial" data-project="office">
               <img src="images/OFFICE_3.jpg" alt="Commercial interior design project by Karla de Beer" loading="lazy" />
               <figcaption class="image-caption">
                 <h3>Office Space</h3>
@@ -214,7 +274,7 @@
               </figcaption>
             </figure>
 
-            <figure class="showcase-image" data-category="commercial">
+            <figure class="showcase-image" data-category="commercial" data-project="office">
               <img src="images/OFFICE_4.jpg" alt="Commercial interior design project by Karla de Beer" loading="lazy" />
               <figcaption class="image-caption">
                 <h3>Office Space</h3>
@@ -222,7 +282,7 @@
               </figcaption>
             </figure>
 
-            <figure class="showcase-image" data-category="commercial">
+            <figure class="showcase-image" data-category="commercial" data-project="office">
               <img src="images/OFFICE_5.jpg" alt="Commercial interior design project by Karla de Beer" loading="lazy" />
               <figcaption class="image-caption">
                 <h3>Office Space</h3>
@@ -230,7 +290,7 @@
               </figcaption>
             </figure>
 
-            <figure class="showcase-image" data-category="commercial">
+            <figure class="showcase-image" data-category="commercial" data-project="office">
               <img src="images/OFFICE_6.jpg" alt="Commercial interior design project by Karla de Beer" loading="lazy" />
               <figcaption class="image-caption">
                 <h3>Office Space</h3>
@@ -238,7 +298,7 @@
               </figcaption>
             </figure>
 
-            <figure class="showcase-image" data-category="commercial">
+            <figure class="showcase-image" data-category="commercial" data-project="office">
               <img src="images/OFFICE_7.jpg" alt="Commercial interior design project by Karla de Beer" loading="lazy" />
               <figcaption class="image-caption">
                 <h3>Office Space</h3>
@@ -246,7 +306,7 @@
               </figcaption>
             </figure>
 
-            <figure class="showcase-image" data-category="commercial">
+            <figure class="showcase-image" data-category="commercial" data-project="office">
               <img src="images/OFFICE_8.jpg" alt="Commercial interior design project by Karla de Beer" loading="lazy" />
               <figcaption class="image-caption">
                 <h3>Office Space</h3>
@@ -254,7 +314,7 @@
               </figcaption>
             </figure>
 
-            <figure class="showcase-image" data-category="commercial">
+            <figure class="showcase-image" data-category="commercial" data-project="office">
               <img src="images/OFFICE_9.jpg" alt="Commercial interior design project by Karla de Beer" loading="lazy" />
               <figcaption class="image-caption">
                 <h3>Office Space</h3>
@@ -262,8 +322,8 @@
               </figcaption>
             </figure>
 
-            <!-- Versivia Roses images -->
-            <figure class="showcase-image" data-category="commercial">
+            <!-- Commercial images: Versivia Roses project -->
+            <figure class="showcase-image" data-category="commercial" data-project="versivia">
               <img src="images/VERSIVIA_1.jpg" alt="Versivia Roses commercial building exterior render by Karla de Beer" loading="lazy" />
               <figcaption class="image-caption">
                 <h3>Versivia Roses</h3>
@@ -271,7 +331,7 @@
               </figcaption>
             </figure>
 
-            <figure class="showcase-image" data-category="commercial">
+            <figure class="showcase-image" data-category="commercial" data-project="versivia">
               <img src="images/VERSIVIA_2.jpg" alt="Versivia Roses reception entrance render by Karla de Beer" loading="lazy" />
               <figcaption class="image-caption">
                 <h3>Reception Entrance</h3>
@@ -279,7 +339,7 @@
               </figcaption>
             </figure>
 
-            <figure class="showcase-image" data-category="commercial">
+            <figure class="showcase-image" data-category="commercial" data-project="versivia">
               <img src="images/VERSIVIA_3.jpg" alt="Versivia Roses rooftop terrace render by Karla de Beer" loading="lazy" />
               <figcaption class="image-caption">
                 <h3>Rooftop Terrace</h3>
@@ -287,8 +347,8 @@
               </figcaption>
             </figure>
 
-            <!-- Residential images (placeholders - replace with actual images) -->
-            <figure class="showcase-image" data-category="residential">
+            <!-- Residential images: Farmhouse project -->
+            <figure class="showcase-image" data-category="residential" data-project="farmhouse">
               <img src="images/FARMHOUSE_1.jpg" alt="Residential interior design project by Karla de Beer" loading="lazy" />
               <figcaption class="image-caption">
                 <h3>Private Residence</h3>
@@ -296,7 +356,7 @@
               </figcaption>
             </figure>
 
-            <figure class="showcase-image" data-category="residential">
+            <figure class="showcase-image" data-category="residential" data-project="farmhouse">
               <img src="images/FARMHOUSE_2.jpg" alt="Residential interior design project by Karla de Beer" loading="lazy" />
               <figcaption class="image-caption">
                 <h3>Private Residence</h3>
@@ -304,7 +364,7 @@
               </figcaption>
             </figure>
 
-            <figure class="showcase-image" data-category="residential">
+            <figure class="showcase-image" data-category="residential" data-project="farmhouse">
               <img src="images/FARMHOUSE_3.jpg" alt="Residential interior design project by Karla de Beer" loading="lazy" />
               <figcaption class="image-caption">
                 <h3>Private Residence</h3>
@@ -312,7 +372,7 @@
               </figcaption>
             </figure>
 
-            <figure class="showcase-image" data-category="residential">
+            <figure class="showcase-image" data-category="residential" data-project="farmhouse">
               <img src="images/FARMHOUSE_4.jpg" alt="Residential interior design project by Karla de Beer" loading="lazy" />
               <figcaption class="image-caption">
                 <h3>Private Residence</h3>
@@ -320,7 +380,7 @@
               </figcaption>
             </figure>
 
-            <figure class="showcase-image" data-category="residential">
+            <figure class="showcase-image" data-category="residential" data-project="farmhouse">
               <img src="images/FARMHOUSE_5.jpg" alt="Residential interior design project by Karla de Beer" loading="lazy" />
               <figcaption class="image-caption">
                 <h3>Private Residence</h3>
@@ -328,7 +388,7 @@
               </figcaption>
             </figure>
 
-            <figure class="showcase-image" data-category="residential">
+            <figure class="showcase-image" data-category="residential" data-project="farmhouse">
               <img src="images/FARMHOUSE_6.jpg" alt="Residential interior design project by Karla de Beer" loading="lazy" />
               <figcaption class="image-caption">
                 <h3>Private Residence</h3>
@@ -336,7 +396,7 @@
               </figcaption>
             </figure>
 
-            <figure class="showcase-image" data-category="residential">
+            <figure class="showcase-image" data-category="residential" data-project="farmhouse">
               <img src="images/FARMHOUSE_7.jpg" alt="Residential interior design project by Karla de Beer" loading="lazy" />
               <figcaption class="image-caption">
                 <h3>Private Residence</h3>
@@ -344,7 +404,7 @@
               </figcaption>
             </figure>
 
-            <figure class="showcase-image" data-category="residential">
+            <figure class="showcase-image" data-category="residential" data-project="farmhouse">
               <img src="images/FARMHOUSE_8.jpg" alt="Residential interior design project by Karla de Beer" loading="lazy" />
               <figcaption class="image-caption">
                 <h3>Private Residence</h3>
