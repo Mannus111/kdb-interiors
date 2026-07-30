@@ -44,7 +44,7 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
   animateFollower();
 
   // Expand on interactive elements
-  const interactiveSelectors = 'a, button, .service-card, .price-item, .process-step, .btn-submit, .showcase-control, .dot, input, textarea, select';
+  const interactiveSelectors = 'a, button, .service-card, .price-item, .process-step, .btn-submit, .showcase-control, .dot, input, textarea, select, .project-card, .showcase-back';
   $$( interactiveSelectors).forEach((el) => {
     el.addEventListener('mouseenter', () => follower.classList.add('hovered'));
     el.addEventListener('mouseleave', () => follower.classList.remove('hovered'));
@@ -236,19 +236,23 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
   const counterCurrent = $('.counter-current', carousel);
   const counterTotal = $('.counter-total', carousel);
   const tabs = $$('.portfolio-tab');
+  const projectGrids = $$('.project-grid');
+  const projectCards = $$('.project-card');
+  const showcaseWrap = $('#portfolioShowcase');
+  const backBtn = $('#showcaseBack');
 
   if (allImages.length === 0) return;
 
   let currentCategory = 'hospitality';
   let currentIndex = 0;
-  let categoryImages = [];
+  let projectImages = [];
 
   const buildDots = (count) => {
     dotsContainer.innerHTML = '';
     for (let i = 0; i < count; i++) {
       const dot = document.createElement('button');
       dot.className = 'dot' + (i === 0 ? ' active' : '');
-      dot.setAttribute('aria-label', `Go to project ${i + 1}`);
+      dot.setAttribute('aria-label', `Go to image ${i + 1}`);
       dot.dataset.index = i;
       dot.addEventListener('click', (e) => {
         e.preventDefault();
@@ -258,31 +262,11 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
     }
   };
 
-  const loadCategory = (category) => {
-    currentCategory = category;
-    currentIndex = 0;
-
-    // Filter images by category
-    allImages.forEach(img => img.classList.remove('active'));
-    categoryImages = allImages.filter(img => img.dataset.category === category);
-
-    if (categoryImages.length === 0) return;
-
-    // Update counter total
-    if (counterTotal) counterTotal.textContent = categoryImages.length;
-
-    // Build dots
-    buildDots(categoryImages.length);
-
-    // Show first
-    updateCarousel(0);
-  };
-
   const updateCarousel = (index) => {
-    currentIndex = (index + categoryImages.length) % categoryImages.length;
+    currentIndex = (index + projectImages.length) % projectImages.length;
 
     // Update images
-    categoryImages.forEach((img, i) => {
+    projectImages.forEach((img, i) => {
       img.classList.toggle('active', i === currentIndex);
     });
 
@@ -296,7 +280,44 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
     if (counterCurrent) counterCurrent.textContent = currentIndex + 1;
   };
 
-  // Tab switching
+  const loadProject = (projectId) => {
+    currentIndex = 0;
+
+    // Filter images by project
+    allImages.forEach(img => img.classList.remove('active'));
+    projectImages = allImages.filter(img => img.dataset.project === projectId);
+
+    if (projectImages.length === 0) return;
+
+    // Update counter total
+    if (counterTotal) counterTotal.textContent = projectImages.length;
+
+    // Build dots
+    buildDots(projectImages.length);
+
+    // Show first
+    updateCarousel(0);
+  };
+
+  // Show the project-card grid for a given category, hide the gallery
+  const showCategoryGrid = (category) => {
+    currentCategory = category;
+    projectGrids.forEach((grid) => {
+      grid.hidden = grid.dataset.categoryGrid !== category;
+      grid.classList.toggle('active', grid.dataset.categoryGrid === category);
+    });
+    if (showcaseWrap) showcaseWrap.hidden = true;
+  };
+
+  // Open a project's gallery, hide the card grid
+  const openProjectGallery = (projectId) => {
+    projectGrids.forEach((grid) => { grid.hidden = true; });
+    if (showcaseWrap) showcaseWrap.hidden = false;
+    loadProject(projectId);
+    showcaseWrap?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  // Tab switching (category level)
   tabs.forEach((tab) => {
     tab.addEventListener('click', () => {
       tabs.forEach(t => {
@@ -305,11 +326,24 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
       });
       tab.classList.add('active');
       tab.setAttribute('aria-selected', 'true');
-      loadCategory(tab.dataset.category);
+      showCategoryGrid(tab.dataset.category);
     });
   });
 
-  // Button event listeners
+  // Project card clicks (open that project's gallery)
+  projectCards.forEach((card) => {
+    card.addEventListener('click', () => {
+      openProjectGallery(card.dataset.project);
+    });
+  });
+
+  // Back to projects
+  backBtn?.addEventListener('click', () => {
+    if (showcaseWrap) showcaseWrap.hidden = true;
+    showCategoryGrid(currentCategory);
+  });
+
+  // Carousel button event listeners
   prevBtn?.addEventListener('click', (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -322,8 +356,8 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
     updateCarousel(currentIndex + 1);
   });
 
-  // Initialize with hospitality
-  loadCategory('hospitality');
+  // Initialize showing the Hospitality project grid
+  showCategoryGrid('hospitality');
 })();
 
 /* ── Smooth anchor scroll (polyfill fallback) ────────────────── */
@@ -352,13 +386,17 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
   let allImages = [];
   let currentIndex = 0;
 
-  // Collect all showcase images
-  function collectImages() {
-    allImages = $$('.showcase-image img');
+  // Collect only the images belonging to the same project as the clicked image
+  function collectImages(clickedImg) {
+    const project = clickedImg.closest('.showcase-image')?.dataset.project;
+    allImages = $$('.showcase-image img').filter(
+      (img) => img.closest('.showcase-image')?.dataset.project === project
+    );
   }
 
-  function openModal(index) {
-    currentIndex = index;
+  function openModal(clickedImg) {
+    collectImages(clickedImg);
+    currentIndex = allImages.indexOf(clickedImg);
     const img = allImages[currentIndex];
     modalImg.src = img.src;
     modalImg.alt = img.alt;
@@ -385,12 +423,9 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
     document.body.style.overflow = '';
   }
 
-  // Initialize images list
-  collectImages();
-
   // Add click handler to all showcase images
-  $$('.showcase-image img').forEach((img, index) => {
-    img.addEventListener('click', () => openModal(index));
+  $$('.showcase-image img').forEach((img) => {
+    img.addEventListener('click', () => openModal(img));
   });
 
   // Navigation buttons
