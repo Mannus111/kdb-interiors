@@ -463,7 +463,7 @@ button { font-family: inherit; cursor: none; border: none; background: none; }
 .about-bg-photo {
   position: absolute;
   inset: 0;
-  background: url('images/about_collage.jpg') 30% center / cover no-repeat;
+  background: url('../images/about_collage.jpg') 30% center / cover no-repeat;
   background-color: #2a2624;
 }
 
