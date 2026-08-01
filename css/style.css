@@ -459,12 +459,12 @@ button { font-family: inherit; cursor: none; border: none; background: none; }
   overflow: hidden;
 }
 
-/* Full-bleed background photo (Karla in wheat field) */
+/* Full-bleed background photo (Karla's design process collage) */
 .about-bg-photo {
   position: absolute;
   inset: 0;
-  background: url('/images/karla_photo.jpg') center 20% / cover no-repeat;
-  background-color: #5a6650;
+  background: url('images/about_collage.jpg') 30% center / cover no-repeat;
+  background-color: #2a2624;
 }
 
 .about-overlay {
@@ -472,9 +472,9 @@ button { font-family: inherit; cursor: none; border: none; background: none; }
   inset: 0;
   background: linear-gradient(
     105deg,
-    rgba(20, 18, 16, 0.72) 0%,
-    rgba(20, 18, 16, 0.55) 45%,
-    rgba(20, 18, 16, 0.2) 100%
+    rgba(20, 18, 16, 0.78) 0%,
+    rgba(20, 18, 16, 0.62) 45%,
+    rgba(20, 18, 16, 0.48) 100%
   );
 }
 
@@ -1504,6 +1504,10 @@ footer {
     justify-content: center;
   }
   .about-text { max-width: 100%; }
+  .about-bg-photo { background-position: 25% center; }
+  .about-overlay {
+    background: rgba(16, 14, 13, 0.8);
+  }
 
   #portfolio { padding: 80px 24px; }
   .showcase-control { width: 44px; height: 44px; font-size: 1.5rem; }
